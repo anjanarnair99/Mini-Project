@@ -9,6 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.InvalidKeyException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,7 +79,7 @@ public class register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String enp = null;
         
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -93,36 +98,46 @@ public class register extends HttpServlet {
         
         final String secretKey=hashpass;
         String originalString = ndb;
+      
+        try {
+            enp = aes.encrypt(originalString, secretKey);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        String enp=aes.encrypt(originalString, secretKey);
         
-         System.out.println("");
-        /*System.out.println(name);
+        System.out.println(name);
         System.out.println(email);
         System.out.println(mobile);
-        System.out.println(username);*/
+        System.out.println(username);
         System.out.println(password);
         System.out.println(hashpass);
         System.out.println(bineryData);
-        //System.out.println(leng);
         System.out.println(ndb);
         System.out.println(enp);
         
-        try {
+        
+       try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/aenp", "root", "");
                 
-                PreparedStatement pst = conn.prepareStatement("INSERT INTO authentication_table (name, email, mobile, username, secretkey, enp) VALUES (?,?,?,?,?,?)");
+                PreparedStatement pst = conn.prepareStatement("INSERT INTO authentication_table (name, email, mobile, username, secretkey, status, enp, type) VALUES (?,?,?,?,?,?,?,?)");
                 pst.setString(1, name);
                 pst.setString(2, email);
                 pst.setString(3, mobile);
                 pst.setString(4, username);
                 pst.setString(5, hashpass);
-                pst.setString(6, enp);
+                pst.setString(6, "NotApproved");
+                pst.setString(7, enp);
+                pst.setString(8, "user");
                
                 pst.execute();
                 
-                response.sendRedirect("User/Home.html");
+                response.sendRedirect("registration_sucess.jsp");
                 
             }
             catch (ClassNotFoundException | SQLException e) {
