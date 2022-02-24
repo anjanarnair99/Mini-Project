@@ -1,3 +1,10 @@
+<%-- 
+    Document   : dfd.jsp
+    Created on : 20 Feb, 2022, 9:26:43 AM
+    Author     : mahes
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -41,16 +48,15 @@
             <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li>
                         <a href="index.html">Home</a>
                     </li>
                     <li>
                         <a href="abstract.html">Abstract</a>
                     </li>
-                    
-					<!--li>
+                    <!--li class="active">
 					<a href="dfd.jsp">DFD</a>
-					</li-->    
+					</li-->  
                 </ul>
 
             </div>
@@ -86,32 +92,10 @@
 			<!-- Articles -->
 			<div class="row">
 				<article class="col-xs-12">
-					<h2>Authentication by Encrypted Negative Password</h2>
-                                        <p style="text-align: justify;">OWING to the development of the Internet, a vast number
-of online services have emerged, in which password
-authentication is the most widely used authentication technique, for it is available at a low cost and easy to deploy. Hence, password security always attracts great interest from academia and industry. Despite great research
-achievements on password security, passwords are still cracked
-since users’ careless behaviors. For instance, many users
-often select weak passwords they tend to reuse
-same passwords in different systems they usually set
-their passwords using familiar vocabulary for its convenience
-to remember. In addition, system problems may
-cause password compromises. It is very difficult to obtain
-passwords from high security systems. On the one hand,
-stealing authentication data tables (containing usernames and
-passwords) in high security systems is difficult.</p>
+					<h2>Fig 1.</h2>
                                         <hr>
-                                        <h3>Abstract</h3>
-                                        <p style="text-align: justify;">Secure password storage is a vital aspect in systems based on password authentication, which is still the most widely used authentication technique, despite its some security flaws. In
-                                            this paper, we propose a password authentication framework
-                                            that is designed for secure password storage and could be
-                                            easily integrated into existing authentication systems. In our
-                                            framework, first, the received plain password from a client is
-                                            hashed through a cryptographic hash function (e.g., SHA-256).
-                                            Then, the hashed password is converted into a negative password.
-                                            </p>
-                                            <p><a href="abstract.html"><button class="btn btn-default">Read More</button></a></p>
-					</article>
+                                        <image src="E:/PROJECT STUDETS/2022/Anjana Negative Password/AENP/images/Authentication.png" />
+                                        </article>
 			</div>
 			
 			<hr>      
@@ -177,3 +161,4 @@ passwords) in high security systems is difficult.</p>
 </body>
 
 </html>
+
